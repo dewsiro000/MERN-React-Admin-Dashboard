@@ -1,9 +1,12 @@
-import { CssBaseline, TheneProvider } from "@mui/material"
+import { CssBaseline, ThemeProvider } from "@mui/material"
 import { createTheme } from "@mui/material/styles";
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
-import { BrowserRouter } from "react-router-dom";
 import { themeSettings } from "theme";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import Layout from "scenes/layout"
+import Dashboard from "scenes/dashboard";
+import ErrorBoundary from './components/ErrorBoundary';
 
 function App() {
 
@@ -13,18 +16,17 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <TheneProvider theme={theme}>
+        <ThemeProvider theme={theme}>
           <CssBaseline />
           <Routes>
             <Route element={<Layout />}>
-              <Route path="/" element={<Nevigate to="/dashboard" replace />}>
-              </Route>
+              <Route path="/" element={<Navigate to="/dashboard" replace />} />
+              <Route path="/dashboard" element={<Dashboard />} />
             </Route>
           </Routes>
-        </TheneProvider>
+        </ThemeProvider>
       </BrowserRouter>
     </div>
   );
 }
-
 export default App;
